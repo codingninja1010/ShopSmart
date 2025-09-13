@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addCart, delCart, removeAllOfProduct } from "../redux/action";
 import { Link } from "react-router-dom";
 import LazyImage from "../components/LazyImage";
+import { usdToInr, formatINR } from "../utils/currency";
 
 const Cart = () => {
   const state = useSelector((state) => state.handleCart);
@@ -36,7 +37,8 @@ const Cart = () => {
 
   const ShowCart = () => {
     let subtotal = 0;
-    let shipping = 30.0;
+  // Base shipping in USD; convert to INR for display
+  let shippingUSD = 30.0;
     let totalItems = 0;
     state.map((item) => {
       return (subtotal += item.price * item.qty);
@@ -122,7 +124,7 @@ const Cart = () => {
                               <p className="text-start text-md-center">
                                 <strong>
                                   <span className="text-muted">{item.qty}</span>{" "}
-                                  x ${item.price}
+                                  x {formatINR(usdToInr(Number(item.price)))}
                                 </strong>
                               </p>
                             </div>
@@ -143,18 +145,18 @@ const Cart = () => {
                   <div className="card-body">
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                        Products ({totalItems})<span>${Math.round(subtotal)}</span>
+                        Products ({totalItems})<span>{formatINR(Math.round(usdToInr(subtotal)))}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                         Shipping
-                        <span>${shipping}</span>
+                        <span>{formatINR(Math.round(usdToInr(shippingUSD)))}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                         <div>
                           <strong>Total amount</strong>
                         </div>
                         <span>
-                          <strong>${Math.round(subtotal + shipping)}</strong>
+                          <strong>{formatINR(Math.round(usdToInr(subtotal + shippingUSD)))}</strong>
                         </span>
                       </li>
                     </ul>

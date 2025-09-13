@@ -7,6 +7,7 @@ import { addCart } from "../redux/action";
 
 import { Footer, Navbar } from "../components";
 import LazyImage from "../components/LazyImage";
+import { usdToInr, formatINR } from "../utils/currency";
 
 const Product = () => {
   const { id } = useParams();
@@ -86,7 +87,7 @@ const Product = () => {
                 {product && product.rating ? product.rating.rate : ""} {" "}
                 <i className="fa fa-star"></i>
               </p>
-              <h3 className="display-6  my-4">${product.price}</h3>
+              <h3 className="display-6  my-4">{formatINR(usdToInr(Number(product.price)))}</h3>
               <p className="lead">{product.description}</p>
               <button
                 className="btn btn-outline-dark"

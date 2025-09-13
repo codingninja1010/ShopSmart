@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import SortSelect from "./SortSelect";
 import LazyImage from "./LazyImage";
 import toast from "react-hot-toast";
+import { usdToInr, formatINR } from "../utils/currency";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -165,7 +166,7 @@ const Products = () => {
                   <p className="card-text clamp-3">{product.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item lead">$ {Number(product.price).toFixed(2)}</li>
+                  <li className="list-group-item lead">{formatINR(usdToInr(Number(product.price)))}</li>
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
@@ -232,7 +233,7 @@ const Products = () => {
                     {preview.rating && (
                       <p className="mb-2"><span className="text-star"><i className="fa fa-star"></i></span> {preview.rating.rate} <span className="text-muted">({preview.rating.count} reviews)</span></p>
                     )}
-                    <p className="lead mb-3">$ {Number(preview.price).toFixed(2)}</p>
+                    <p className="lead mb-3">{formatINR(usdToInr(Number(preview.price)))}</p>
                     <div className="d-flex gap-2">
                       <Link to={"/product/" + preview.id} className="btn btn-primary" onClick={()=> setPreview(null)}>
                         View Details
