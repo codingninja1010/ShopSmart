@@ -13,3 +13,11 @@ export const delCart = (product) =>{
         payload:product
     }
 }
+
+// For Remove All of a Product from Cart
+export const removeAllOfProduct = (product) => {
+    return {
+        type: "REMALLITEM",
+        payload: product
+    }
+}

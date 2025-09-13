@@ -140,6 +140,26 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s;
 }
 
+/* Quantity buttons in cart: keep icons visible without hover */
+.qty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: var(--btn-bg);
+  color: var(--btn-text) !important;
+  border: 1px solid var(--btn-border);
+  border-radius: 10px;
+}
+.qty-btn i { color: inherit; }
+.qty-btn:hover {
+  background: var(--navbar-hover);
+  border-color: var(--navbar-hover);
+  color: #fff !important;
+}
+
 /* Force visible text on outline buttons based on theme */
 [data-theme="light"] .btn-outline-dark {
   color: #111827 !important; /* near-black */

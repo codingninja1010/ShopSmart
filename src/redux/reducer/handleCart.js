@@ -37,6 +37,12 @@ const handleCart = (state = getInitialCart(), action) => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
 
+    case "REMALLITEM":
+      // Remove the product completely regardless of current quantity
+      updatedCart = state.filter((x) => x.id !== product.id);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+
     default:
       return state;
   }

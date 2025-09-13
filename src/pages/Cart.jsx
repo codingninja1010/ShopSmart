@@ -85,7 +85,7 @@ const Cart = () => {
                                 style={{ maxWidth: "300px" }}
                               >
                                 <button
-                                  className="btn px-3"
+                                  className="btn qty-btn"
                                   onClick={() => {
                                     removeItem(item);
                                   }}
@@ -96,7 +96,7 @@ const Cart = () => {
                                 <p className="mx-5">{item.qty}</p>
 
                                 <button
-                                  className="btn px-3"
+                                  className="btn qty-btn"
                                   onClick={() => {
                                     addItem(item);
                                   }}
