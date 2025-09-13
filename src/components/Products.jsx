@@ -12,7 +12,7 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
+  // Avoid setting state after unmount and cancel fetch on route change
 
   const dispatch = useDispatch();
 
@@ -21,21 +21,26 @@ const Products = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
+      try {
+        const response = await fetch("https://fakestoreapi.com/products/", { signal });
+        const json = await response.json();
+        setData(json);
+        setFilter(json);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Failed to load products', err);
+        }
+      } finally {
         setLoading(false);
       }
-
-      return () => {
-        componentMounted = false;
-      };
     };
 
     getProducts();
+    return () => controller.abort();
   }, []);
 
   const Loading = () => {

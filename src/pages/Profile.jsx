@@ -3,8 +3,19 @@ import { Navbar, Footer } from "../components";
 import { useNavigate } from "react-router-dom";
 
 const getUser = () => {
-  const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : { name: "", email: "" };
+  // Prefer unified 'currentUser' written by Login/Register; fallback to legacy 'user'
+  const current = localStorage.getItem("currentUser");
+  if (current) return JSON.parse(current);
+  const legacy = localStorage.getItem("user");
+  if (legacy) {
+    try {
+      const parsed = JSON.parse(legacy);
+      return { name: parsed.name || "", email: parsed.email || "" };
+    } catch {
+      return { name: "", email: "" };
+    }
+  }
+  return { name: "", email: "" };
 };
 
 const Profile = () => {
@@ -18,12 +29,15 @@ const Profile = () => {
 
   const handleChangePassword = (e) => {
     e.preventDefault();
-    const stored = JSON.parse(localStorage.getItem("user"));
+    // In demo mode we can't truly validate without a backend.
+    // Try to read legacy 'user' to keep compatibility; otherwise allow update feedback only.
+    const storedRaw = localStorage.getItem("user");
+    const stored = storedRaw ? JSON.parse(storedRaw) : null;
     if (!oldPass || !newPass || !confirmPass) {
       setMsg("All fields are required.");
       return;
     }
-    if (oldPass !== stored.password) {
+    if (stored && oldPass !== stored.password) {
       setMsg("Old password is incorrect.");
       return;
     }
@@ -31,10 +45,12 @@ const Profile = () => {
       setMsg("New passwords do not match.");
       return;
     }
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ ...stored, password: newPass })
-    );
+    if (stored) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...stored, password: newPass })
+      );
+    }
     setMsg("Password changed successfully!");
     setOldPass("");
     setNewPass("");

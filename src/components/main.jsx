@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
         <div className="card border-0 mx-3 shadow-lg rounded-xl overflow-hidden position-relative">
           <img
             className="card-img img-fluid w-100"
-            src="./assets/main.png.jpg"
+            src="/assets/main.png.jpg"
             alt="ShopSmart Hero"
             style={{ maxHeight: 500, objectFit: 'cover' }}
           />
@@ -38,9 +39,9 @@ const Home = () => {
                 Discover the latest trends, exclusive deals, and a seamless shopping experience.<br />
                 Shop smarter, live better.
               </p>
-              <a href="/product" className="btn btn-primary btn-lg shadow rounded-xl px-4 py-2">
-                Shop Now <i className="fa fa-arrow-right ml-2"></i>
-              </a>
+              <Link to="/product" className="btn btn-primary btn-lg shadow rounded-xl px-4 py-2">
+                <i className="fa fa-arrow-right me-1"></i> Shop Now
+              </Link>
             </div>
           </div>
         </div>

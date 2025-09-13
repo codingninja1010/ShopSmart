@@ -14,12 +14,13 @@ const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('currentUser');
         setIsLoggedIn(false);
         window.location.href = '/';
     };
 
     return (
-        <nav className="navbar navbar-expand-lg py-3 sticky-top shadow-lg">
+        <nav className="navbar navbar-expand-lg navbar-dark py-3 sticky-top shadow-lg">
             <div className="container">
                 <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/">ShopSmart</NavLink>
                 <button className="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,16 +44,16 @@ const Navbar = () => {
                     <div className="d-flex align-items-center gap-2 flex-wrap justify-content-center">
                         {!isLoggedIn ? (
                             <>
-                                <NavLink to="/login" className="btn btn-outline-dark m-1"><i className="fa fa-sign-in-alt mr-1"></i> Login</NavLink>
-                                <NavLink to="/register" className="btn btn-outline-dark m-1"><i className="fa fa-user-plus mr-1"></i> Register</NavLink>
+                                <NavLink to="/login" className="btn btn-outline-dark m-1"><i className="fa fa-sign-in me-1"></i> Login</NavLink>
+                                <NavLink to="/register" className="btn btn-outline-dark m-1"><i className="fa fa-user-plus me-1"></i> Register</NavLink>
                             </>
                         ) : (
                             <>
-                                <NavLink to="/profile" className="btn btn-outline-dark m-1"><i className="fa fa-user mr-1"></i> Profile</NavLink>
-                                <button className="btn btn-outline-dark m-1" onClick={handleLogout}><i className="fa fa-sign-out mr-1"></i> Logout</button>
+                                <NavLink to="/profile" className="btn btn-outline-dark m-1"><i className="fa fa-user me-1"></i> Profile</NavLink>
+                                <button className="btn btn-outline-dark m-1" onClick={handleLogout}><i className="fa fa-sign-out me-1"></i> Logout</button>
                             </>
                         )}
-                        <NavLink to="/cart" className="btn btn-outline-dark m-1"><i className="fa fa-cart-shopping mr-1"></i> Cart ({state.length})</NavLink>
+                        <NavLink to="/cart" className="btn btn-outline-dark m-1"><i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})</NavLink>
                         <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle theme">
                             {theme === "dark" ? <i className="fa fa-sun-o"></i> : <i className="fa fa-moon-o"></i>}
                         </button>

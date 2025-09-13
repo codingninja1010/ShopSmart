@@ -2,6 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./theme.css";
@@ -67,9 +68,9 @@ root.render(
             <Route path="*" element={<PageNotFound />} />
             <Route path="/product/*" element={<PageNotFound />} />
           </Routes>
+          <Toaster />
         </Provider>
       </ThemeProvider>
     </ScrollToTop>
-    <Toaster />
   </BrowserRouter>
 );
