@@ -12,6 +12,8 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState("relevance"); // relevance | price-asc | price-desc | rating
   // Avoid setting state after unmount and cancel fetch on route change
 
   const dispatch = useDispatch();
@@ -76,6 +78,24 @@ const Products = () => {
     setFilter(updatedList);
   };
 
+  // Derived visible products with search + sorting over current filter set
+  const getVisible = () => {
+    const base = filter.length ? filter : data;
+    let list = base.filter((p) =>
+      [p.title, p.description, p.category]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase()
+        .includes(query.toLowerCase())
+    );
+    if (sortBy === "price-asc") list.sort((a,b)=> a.price - b.price);
+    else if (sortBy === "price-desc") list.sort((a,b)=> b.price - a.price);
+    else if (sortBy === "rating") list.sort((a,b)=> (b.rating?.rate||0) - (a.rating?.rate||0));
+    return list;
+  };
+
+  const [preview, setPreview] = useState(null);
+
   const ShowProducts = () => {
     return (
       <>
@@ -112,7 +132,28 @@ const Products = () => {
           </button>
         </div>
 
-        {filter.map((product) => {
+        {/* Toolbar: Search + Sort */}
+        <div className="row align-items-center justify-content-between g-2 mb-4">
+          <div className="col-md-6">
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search products..."
+              value={query}
+              onChange={(e)=> setQuery(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4 text-md-end">
+            <select className="form-select" value={sortBy} onChange={(e)=> setSortBy(e.target.value)}>
+              <option value="relevance">Sort: Relevance</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        {getVisible().map((product) => {
           return (
             <div
               id={product.id}
@@ -162,6 +203,12 @@ const Products = () => {
                   >
                     <i className="fa fa-cart-plus icon"></i> Add to Cart
                   </button>
+                  <button
+                    className="btn btn-outline-primary m-1"
+                    onClick={() => setPreview(product)}
+                  >
+                    <i className="fa fa-eye icon"></i> Quick View
+                  </button>
                 </div>
               </div>
             </div>
@@ -183,6 +230,47 @@ const Products = () => {
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
+
+      {/* Quick View Modal */}
+      {preview && (
+        <div className="modal fade show" style={{display:'block'}} tabIndex="-1" role="dialog">
+          <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{preview.title}</h5>
+                <button type="button" className="btn-close" onClick={()=> setPreview(null)} aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <div className="row g-3 align-items-center">
+                  <div className="col-md-5 text-center">
+                    <img src={preview.image} alt={preview.title} className="img-fluid" style={{maxHeight: 320, objectFit:'contain'}} />
+                  </div>
+                  <div className="col-md-7">
+                    <p className="clamp-3">{preview.description}</p>
+                    {preview.rating && (
+                      <p className="mb-2"><span className="text-star"><i className="fa fa-star"></i></span> {preview.rating.rate} <span className="text-muted">({preview.rating.count} reviews)</span></p>
+                    )}
+                    <p className="lead mb-3">$ {Number(preview.price).toFixed(2)}</p>
+                    <div className="d-flex gap-2">
+                      <Link to={"/product/" + preview.id} className="btn btn-primary" onClick={()=> setPreview(null)}>
+                        View Details
+                      </Link>
+                      <button className="btn btn-dark" onClick={()=> { addProduct(preview); toast.success('Added to cart'); }}>
+                        <i className="fa fa-cart-plus icon"></i> Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-outline-secondary" onClick={()=> setPreview(null)}>Close</button>
+              </div>
+            </div>
+          </div>
+          {/* Backdrop */}
+          <div className="modal-backdrop fade show" onClick={()=> setPreview(null)}></div>
+        </div>
+      )}
     </>
   );
 };

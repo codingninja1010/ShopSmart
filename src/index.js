@@ -24,6 +24,7 @@ import {
 import Profile from "./pages/Profile";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import BackToTop from "./components/BackToTop";
 
 
 export const ThemeContext = createContext();
@@ -69,6 +70,7 @@ root.render(
             <Route path="/product/*" element={<PageNotFound />} />
           </Routes>
           <Toaster />
+          <BackToTop />
         </Provider>
       </ThemeProvider>
     </ScrollToTop>
