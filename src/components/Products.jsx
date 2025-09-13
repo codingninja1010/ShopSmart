@@ -131,26 +131,7 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Toolbar: Search + Sort */}
-        <div className="row align-items-center justify-content-between g-2 mb-4">
-          <div className="col-md-6">
-            <input
-              className="form-control"
-              type="search"
-              placeholder="Search products..."
-              value={query}
-              onChange={(e)=> setQuery(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4 text-md-end">
-            <select className="form-select" value={sortBy} onChange={(e)=> setSortBy(e.target.value)}>
-              <option value="relevance">Sort: Relevance</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="rating">Top Rated</option>
-            </select>
-          </div>
-        </div>
+        {/* End toolbar */}
 
         {getVisible().map((product) => {
           return (
