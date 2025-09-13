@@ -1,8 +1,4 @@
-/* Hero section text improvements for readability */
-.hero-title, .hero-desc {
-  color: #fff !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
+/* Keep file ordered: tokens -> base -> components -> utilities -> page-specific */
 .cart-bg {
   background: var(--card-bg) !important;
   color: var(--text) !important;
@@ -36,6 +32,13 @@
   --navbar-bg: #23272b;
   --navbar-text: #f8f9fa;
   --navbar-hover: #0d6efd;
+  /* Added missing tokens used below */
+  --heading: #ffffff;
+  --muted: #9aa4af;
+  /* Button theme tokens (avoid global hard-coded colors) */
+  --btn-bg: rgba(255,255,255,0.08);
+  --btn-text: #f8f9fa;
+  --btn-border: #3a4251;
 }
 
 [data-theme="light"] {
@@ -45,6 +48,11 @@
   --navbar-bg: #fff;
   --navbar-text: #181a1b;
   --navbar-hover: #0d6efd;
+  --heading: #111827; /* near-black for headings on light */
+  --muted: #6b7280;   /* slate-500 */
+  --btn-bg: #f8fafc;  /* subtle light */
+  --btn-text: #111827;
+  --btn-border: #cbd5e1; /* slate-300 */
 }
 
 body {
@@ -80,13 +88,13 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
 }
 
 .navbar .nav-link {
-  color: #e0e6ed !important;
+  color: var(--navbar-text) !important; /* theme-aware link color */
   margin: 0 0.5rem;
   font-weight: 600;
   border-radius: 8px;
   font-size: 1.1rem;
   padding: 0.4rem 1.1rem;
-  background: rgba(255,255,255,0.03);
+  background: transparent;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
@@ -123,17 +131,30 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   }
 }
 
-/* Button improvements */
+/* Button improvements (theme-aware, minimal overrides) */
 .btn {
   border-radius: 8px;
   font-weight: 600;
   padding: 0.5rem 1.2rem;
-  background: rgba(255,255,255,0.08);
-  color: #f8f9fa !important;
-  border: 2px solid #3a4251;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s;
 }
+
+/* Force visible text on outline buttons based on theme */
+[data-theme="light"] .btn-outline-dark {
+  color: #111827 !important; /* near-black */
+  border-color: #111827 !important;
+  background: transparent;
+}
+[data-theme="dark"] .btn-outline-dark {
+  color: #e5e7eb !important; /* slate-200 */
+  border-color: #94a3b8 !important; /* slate-400 */
+  background: transparent;
+}
+[data-theme="light"] .btn-outline-primary { color: var(--primary) !important; border-color: var(--primary) !important; }
+[data-theme="dark"] .btn-outline-primary { color: var(--info) !important; border-color: var(--info) !important; }
+
+/* Keep outline and primary styles from Bootstrap; only adjust subtle hover tint */
 
 
 
@@ -153,7 +174,20 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   border: none;
 }
 
+/* List group to respect theme */
+.list-group-item {
+  background: var(--card-bg);
+  color: var(--text);
+  border-color: rgba(148, 163, 184, 0.35); /* slate-400 @ 35% */
+}
+
 /* Utility classes */
 .rounded-xl { border-radius: 1rem !important; }
 .shadow-lg { box-shadow: 0 2px 12px rgba(0,0,0,0.12) !important; }
+
+/* Hero section text improvements for readability (after base rules) */
+.hero-title, .hero-desc {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
 
