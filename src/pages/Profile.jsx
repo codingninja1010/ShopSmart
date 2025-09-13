@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navbar, Footer } from "../components";
-import { useNavigate } from "react-router-dom";
 
 const getUser = () => {
   // Prefer unified 'currentUser' written by Login/Register; fallback to legacy 'user'
@@ -19,8 +18,7 @@ const getUser = () => {
 };
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState(getUser());
+  const [user] = useState(getUser());
   const [showChange, setShowChange] = useState(false);
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");

@@ -26,7 +26,13 @@ const SortSelect = ({ value, onChange }) => {
   }, []);
 
   return (
-    <div className="custom-select" role="combobox" aria-expanded={open} aria-haspopup="listbox">
+    <div
+      className="custom-select"
+      role="combobox"
+      aria-expanded={open}
+      aria-haspopup="listbox"
+      aria-controls="sort-select-menu"
+    >
       <button
         ref={btnRef}
         type="button"
@@ -38,7 +44,12 @@ const SortSelect = ({ value, onChange }) => {
         <span className="custom-select-caret"><i className={`fa fa-chevron-${open ? 'up' : 'down'}`}></i></span>
       </button>
       {open && (
-        <div ref={menuRef} className="custom-select-menu" role="listbox">
+        <div
+          id="sort-select-menu"
+          ref={menuRef}
+          className="custom-select-menu"
+          role="listbox"
+        >
           {OPTIONS.map(opt => (
             <div
               key={opt.value}
