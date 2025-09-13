@@ -117,9 +117,20 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+              className="product-col col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
             >
-              <div className="card text-center h-100" key={product.id}>
+              <div className="card product-card text-center h-100" key={product.id}>
+                <div className="d-flex justify-content-between align-items-start p-3 pt-3">
+                  <span className="badge-soft text-uppercase">
+                    {product.category}
+                  </span>
+                  {product.rating && (
+                    <span className="text-star" title={`${product.rating.rate} / 5`}>
+                      <i className="fa fa-star"></i> {product.rating.rate}
+                      <span className="text-muted"> ({product.rating.count})</span>
+                    </span>
+                  )}
+                </div>
                 <img
                   className="card-img-top p-3"
                   src={product.image}
@@ -127,12 +138,8 @@ const Products = () => {
                   height={300}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">
-                    {product.title}
-                  </h5>
-                  <p className="card-text">
-                    {product.description.substring(0, 90)}...
-                  </p>
+                  <h5 className="card-title clamp-2">{product.title}</h5>
+                  <p className="card-text clamp-3">{product.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item lead">$ {Number(product.price).toFixed(2)}</li>
@@ -144,7 +151,7 @@ const Products = () => {
                     to={"/product/" + product.id}
                     className="btn btn-dark m-1"
                   >
-                    Buy Now
+                    <i className="fa fa-shopping-bag icon"></i> Buy Now
                   </Link>
                   <button
                     className="btn btn-dark m-1"
@@ -153,7 +160,7 @@ const Products = () => {
                       addProduct(product);
                     }}
                   >
-                    Add to Cart
+                    <i className="fa fa-cart-plus icon"></i> Add to Cart
                   </button>
                 </div>
               </div>

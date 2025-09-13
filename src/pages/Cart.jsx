@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer, Navbar } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import { addCart, delCart } from "../redux/action";
+import { addCart, delCart, removeAllOfProduct } from "../redux/action";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -28,6 +28,9 @@ const Cart = () => {
   };
   const removeItem = (product) => {
     dispatch(delCart(product));
+  };
+  const removeAll = (product) => {
+    dispatch(removeAllOfProduct(product));
   };
 
   const ShowCart = () => {
@@ -81,8 +84,8 @@ const Cart = () => {
 
                             <div className="col-lg-4 col-md-6">
                               <div
-                                className="d-flex mb-4"
-                                style={{ maxWidth: "300px" }}
+                                className="d-flex align-items-center gap-2 mb-4"
+                                style={{ maxWidth: "360px" }}
                               >
                                 <button
                                   className="btn qty-btn"
@@ -102,6 +105,15 @@ const Cart = () => {
                                   }}
                                 >
                                   <i className="fa fa-plus"></i>
+                                </button>
+
+                                {/* Remove this product entirely */}
+                                <button
+                                  className="btn btn-outline-danger ms-3"
+                                  title="Remove item"
+                                  onClick={() => removeAll(item)}
+                                >
+                                  <i className="fa fa-trash"></i>
                                 </button>
                               </div>
 

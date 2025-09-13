@@ -194,6 +194,59 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   border: none;
 }
 
+/* Product card hover-elevate and smooth scale */
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  will-change: transform;
+}
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+.product-card .card-img-top {
+  transition: transform 0.25s ease;
+  object-fit: contain;
+}
+.product-card:hover .card-img-top {
+  transform: scale(1.03);
+}
+
+/* Ensure neighboring cards don't shift on hover */
+.product-col { transition: transform 0.25s ease; }
+.product-col:hover { transform: translateY(-2px); }
+
+/* Responsive grid refinements for nicer wrapping */
+@media (min-width: 992px) { /* lg */
+  .product-col { padding-left: 0.75rem; padding-right: 0.75rem; }
+}
+@media (max-width: 767.98px) {
+  .product-card { transform-origin: center; }
+}
+
+/* Soft badge for categories */
+.badge-soft {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  background: rgba(13,110,253,0.12);
+  color: #cfe2ff;
+  border: 1px solid rgba(13,110,253,0.25);
+}
+
+/* Rating star color */
+.text-star { color: #fbbf24 !important; } /* amber-400 */
+
+/* Line clamp utilities */
+.clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 1; }
+.clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
+.clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 3; }
+
+/* Button icon spacing */
+.btn .icon { margin-right: 0.5rem; }
+
 /* List group to respect theme */
 .list-group-item {
   background: var(--card-bg);
