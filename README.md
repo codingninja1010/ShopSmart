@@ -15,7 +15,11 @@ https://reactjs-ecommerce-app.vercel.app/
 
 ## Screenshots
 
-![App Screenshot](public\assets\ShopSmart.PNG)
+<!-- Use forward slashes for cross-platform + GitHub rendering -->
+![App Screenshot](public/assets/ShopSmart.PNG)
+
+<!-- Fallback HTML (optional): uncomment if you need to control size -->
+<!-- <img src="public/assets/ShopSmart.PNG" alt="App Screenshot" width="800" /> -->
 
 
 
