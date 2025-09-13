@@ -198,10 +198,13 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
 .product-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   will-change: transform;
+  border: 1px solid rgba(148,163,184,0.25); /* subtle border */
 }
 .product-card:hover {
   transform: scale(1.02);
   box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  border-color: var(--navbar-hover);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 0 3px rgba(13,110,253,0.25);
   z-index: 2;
 }
 .product-card .card-img-top {
@@ -246,6 +249,110 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
 
 /* Button icon spacing */
 .btn .icon { margin-right: 0.5rem; }
+
+/* Back to top floating button */
+.back-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 1050;
+}
+.back-to-top:hover {
+  background: var(--navbar-hover);
+  border-color: var(--navbar-hover);
+  color: #fff;
+}
+
+/* Filter toolbar chips */
+.filter-toolbar { gap: 0.5rem; flex-wrap: wrap; }
+.btn-chip {
+  border-radius: 9999px;
+  padding: 0.35rem 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.08s;
+}
+.btn-chip:hover {
+  background: rgba(13,110,253,0.12);
+  border-color: var(--navbar-hover);
+  color: #fff;
+}
+.btn-chip:active { transform: translateY(1px); }
+.btn-chip.active {
+  background: var(--navbar-hover);
+  color: #fff;
+  border-color: var(--navbar-hover);
+  box-shadow: 0 2px 10px rgba(13,110,253,0.25);
+}
+
+/* Toolbar container card */
+.filter-toolbar-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(148,163,184,0.25);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* Pretty form controls */
+.form-control, .form-select {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--navbar-hover);
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,0.25);
+}
+
+/* Custom Select (themed dropdown) */
+.custom-select { position: relative; }
+.custom-select-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-border);
+  border-radius: .5rem;
+}
+.custom-select-toggle:focus { outline: none; border-color: var(--navbar-hover); box-shadow: 0 0 0 0.25rem rgba(13,110,253,0.25); }
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: .5rem;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  z-index: 1051;
+  max-height: 260px;
+  overflow: auto;
+}
+.custom-select-item {
+  padding: .5rem .75rem;
+  cursor: pointer;
+}
+.custom-select-item:hover, .custom-select-item[aria-selected="true"], .custom-select-item.active {
+  background: rgba(13,110,253,0.12);
+}
+.custom-select-caret { margin-left: auto; }
 
 /* List group to respect theme */
 .list-group-item {

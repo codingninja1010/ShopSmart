@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { Link } from "react-router-dom";
+import SortSelect from "./SortSelect";
 import toast from "react-hot-toast";
 
 const Products = () => {
@@ -14,6 +15,7 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("relevance"); // relevance | price-asc | price-desc | rating
+  const [activeCat, setActiveCat] = useState("all");
   // Avoid setting state after unmount and cancel fetch on route change
 
   const dispatch = useDispatch();
@@ -74,8 +76,14 @@ const Products = () => {
   };
 
   const filterProduct = (cat) => {
+    if (cat === 'all') {
+      setFilter(data);
+      setActiveCat('all');
+      return;
+    }
     const updatedList = data.filter((item) => item.category === cat);
     setFilter(updatedList);
+    setActiveCat(cat);
   };
 
   // Derived visible products with search + sorting over current filter set
@@ -99,37 +107,28 @@ const Products = () => {
   const ShowProducts = () => {
     return (
       <>
-        <div className="buttons text-center py-5">
-          <button
-            className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => setFilter(data)}
-          >
-            All
-          </button>
-          <button
-            className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("men's clothing")}
-          >
-            Men's Clothing
-          </button>
-          <button
-            className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("women's clothing")}
-          >
-            Women's Clothing
-          </button>
-          <button
-            className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("jewelery")}
-          >
-            Jewelery
-          </button>
-          <button
-            className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("electronics")}
-          >
-            Electronics
-          </button>
+        <div className="filter-toolbar-card mb-4">
+          <div className="d-flex justify-content-center filter-toolbar">
+            <button className={`btn btn-chip ${activeCat==='all'?'active':''}`} onClick={()=> filterProduct('all')}><i className="fa fa-th-large me-1"></i> All</button>
+            <button className={`btn btn-chip ${activeCat==="men's clothing"?'active':''}`} onClick={()=> filterProduct("men's clothing")}><i className="fa fa-male me-1"></i> Men's Clothing</button>
+            <button className={`btn btn-chip ${activeCat==="women's clothing"?'active':''}`} onClick={()=> filterProduct("women's clothing")}><i className="fa fa-female me-1"></i> Women's Clothing</button>
+            <button className={`btn btn-chip ${activeCat==='jewelery'?'active':''}`} onClick={()=> filterProduct('jewelery')}><i className="fa fa-diamond me-1"></i> Jewelery</button>
+            <button className={`btn btn-chip ${activeCat==='electronics'?'active':''}`} onClick={()=> filterProduct('electronics')}><i className="fa fa-plug me-1"></i> Electronics</button>
+          </div>
+          <div className="row align-items-center justify-content-between g-2 mt-3">
+            <div className="col-md-6">
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Search products..."
+                value={query}
+                onChange={(e)=> setQuery(e.target.value)}
+              />
+            </div>
+            <div className="col-md-4 text-md-end">
+              <SortSelect value={sortBy} onChange={setSortBy} />
+            </div>
+          </div>
         </div>
 
         {/* Toolbar: Search + Sort */}

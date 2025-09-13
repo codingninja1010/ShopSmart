@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 const Navbar = () => {
     const state = useSelector(state => state.handleCart)
+    const totalQty = state.reduce((sum, item) => sum + (item.qty || 0), 0)
     const { theme, toggleTheme } = useContext(ThemeContext);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -53,7 +54,7 @@ const Navbar = () => {
                                 <button className="btn btn-outline-dark m-1" onClick={handleLogout}><i className="fa fa-sign-out me-1"></i> Logout</button>
                             </>
                         )}
-                        <NavLink to="/cart" className="btn btn-outline-dark m-1"><i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})</NavLink>
+                        <NavLink to="/cart" className="btn btn-outline-dark m-1"><i className="fa fa-shopping-cart me-1"></i> Cart ({totalQty})</NavLink>
                         <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle theme">
                             {theme === "dark" ? <i className="fa fa-sun-o"></i> : <i className="fa fa-moon-o"></i>}
                         </button>
