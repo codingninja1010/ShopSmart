@@ -371,3 +371,23 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
+/* Lazy Image: wrapper enforces background placeholder and smooth fade */
+.lazy-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.lazy-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: blur(8px);
+  opacity: 0.6;
+  transition: filter .4s ease, opacity .4s ease;
+}
+.lazy-image-wrapper.loaded .lazy-image {
+  filter: blur(0);
+  opacity: 1;
+}
+

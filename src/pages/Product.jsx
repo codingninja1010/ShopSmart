@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
 import { Footer, Navbar } from "../components";
+import LazyImage from "../components/LazyImage";
 
 const Product = () => {
   const { id } = useParams();
@@ -67,12 +68,15 @@ const Product = () => {
         <div className="container my-5 py-2">
           <div className="row">
             <div className="col-md-6 col-sm-12 py-3">
-              <img
+              <LazyImage
                 className="img-fluid"
                 src={product.image}
                 alt={product.title}
-                width="400px"
-                height="400px"
+                width="400"
+                height="400"
+                style={{ maxHeight: 420, aspectRatio: '1/1', objectFit: 'contain' }}
+                fetchPriority="high"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="col-md-6 col-md-6 py-5">
@@ -131,12 +135,14 @@ const Product = () => {
             {similarProducts.map((item) => {
               return (
                 <div key={item.id} className="card mx-4 text-center">
-                  <img
+                  <LazyImage
                     className="card-img-top p-3"
                     src={item.image}
-                    alt="Card"
-                    height={300}
-                    width={300}
+                    alt={item.title}
+                    width="300"
+                    height="300"
+                    sizes="(max-width: 768px) 60vw, 250px"
+                    style={{ aspectRatio: '1/1', objectFit: 'contain' }}
                   />
                   <div className="card-body">
                     <h5 className="card-title">

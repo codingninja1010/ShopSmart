@@ -3,6 +3,7 @@ import { Footer, Navbar } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart, delCart, removeAllOfProduct } from "../redux/action";
 import { Link } from "react-router-dom";
+import LazyImage from "../components/LazyImage";
 
 const Cart = () => {
   const state = useSelector((state) => state.handleCart);
@@ -64,12 +65,13 @@ const Cart = () => {
                                 className="bg-image rounded"
                                 data-mdb-ripple-color="light"
                               >
-                                <img
+                                <LazyImage
                                   src={item.image}
-                                  // className="w-100"
                                   alt={item.title}
                                   width={100}
                                   height={75}
+                                  style={{ objectFit: 'contain' }}
+                                  sizes="100px"
                                 />
                               </div>
                             </div>

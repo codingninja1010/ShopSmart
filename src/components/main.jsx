@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LazyImage from "./LazyImage";
 
 const Home = () => {
   return (
     <>
       <div className="hero pb-3">
         <div className="card border-0 mx-3 shadow-lg rounded-xl overflow-hidden position-relative">
-          <img
+          <LazyImage
             className="card-img img-fluid w-100"
             src="/assets/main.png.jpg"
             alt="ShopSmart Hero"
             style={{ maxHeight: 500, objectFit: 'cover' }}
+            fetchPriority="high"
+            sizes="100vw"
           />
           {/* Overlay for better text contrast */}
           <div

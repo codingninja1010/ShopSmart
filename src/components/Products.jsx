@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import { Link } from "react-router-dom";
 import SortSelect from "./SortSelect";
+import LazyImage from "./LazyImage";
 import toast from "react-hot-toast";
 
 const Products = () => {
@@ -152,11 +153,12 @@ const Products = () => {
                     </span>
                   )}
                 </div>
-                <img
+                <LazyImage
                   className="card-img-top p-3"
                   src={product.image}
-                  alt="Card"
-                  height={300}
+                  alt={product.title}
+                  style={{ aspectRatio: '1 / 1', maxHeight: 320, objectFit: 'contain' }}
+                  sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
                 />
                 <div className="card-body">
                   <h5 className="card-title clamp-2">{product.title}</h5>
@@ -223,7 +225,7 @@ const Products = () => {
               <div className="modal-body">
                 <div className="row g-3 align-items-center">
                   <div className="col-md-5 text-center">
-                    <img src={preview.image} alt={preview.title} className="img-fluid" style={{maxHeight: 320, objectFit:'contain'}} />
+                    <LazyImage src={preview.image} alt={preview.title} className="img-fluid" style={{maxHeight: 320, aspectRatio:'1/1', objectFit:'contain'}} />
                   </div>
                   <div className="col-md-7">
                     <p className="clamp-3">{preview.description}</p>
