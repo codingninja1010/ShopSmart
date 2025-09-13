@@ -1,3 +1,8 @@
+/* Hero section text improvements for readability */
+.hero-title, .hero-desc {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
 .cart-bg {
   background: var(--card-bg) !important;
   color: var(--text) !important;
