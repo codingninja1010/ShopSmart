@@ -1,137 +1,107 @@
+
 # ShopSmart
 
-A modern React + Redux storefront demo with product browsing, search, filters, sorting, quick view, a persistent cart, and local demo auth. It’s responsive, uses Bootstrap 5, and deploys easily to Netlify.
+A modern, responsive e-commerce web app built with React and Redux. ShopSmart features product browsing, search, category filters, sorting, quick view, a persistent cart, and demo authentication. Designed for a seamless shopping experience and easy deployment.
+
+---
 
 ## 🚀 Live Demo
 
-https://shopsmartweb.netlify.app/
+[View Live Site](https://shopsmartweb.netlify.app/)
 
-## ✨ Highlights
+---
 
-- Product catalog from Fake Store API (with AbortController and skeleton loading)
-- Search, category filters, and sorting (price asc/desc, rating)
-- Quick View modal and lazy-loaded images for snappy UX
-- Add to Cart with quantity merging and persistent storage via localStorage
-- Light/Dark theme toggle stored in localStorage
-- Client-side routing (React Router v6) with SPA fallback on Netlify
-- Demo authentication (Register/Login/Profile) using localStorage only
+## 📝 Project Overview
 
-## 🧭 App Routes
+ShopSmart is a demo e-commerce platform that lets users browse products, add to cart, and simulate checkout. It uses the Fake Store API for product data and stores cart/auth state in localStorage. The app is fully client-rendered and optimized for both desktop and mobile.
 
-- `/` Home
-- `/product` Products listing
-- `/product/:id` Product details
-- `/cart` Cart and checkout entry
-- `/login`, `/register`, `/profile` Demo auth screens
-- `/about`, `/contact` Static info pages
+---
 
-## 🖼️ Screenshot
+## ✨ Features
 
-![ShopSmart](public/assets/ShopSmart.PNG)
+- Product catalog with search, category filters, and sorting (price, rating)
+- Quick View modal and lazy-loaded images for fast UX
+- Add to Cart with quantity merging and persistent storage
+- Light/Dark theme toggle (saved in localStorage)
+- Client-side routing (React Router v6)
+- Demo authentication (Register/Login/Profile) using localStorage
+- Responsive design with Bootstrap 5
+- Accessible controls and ARIA labels
 
-## 📁 Project Structure
+---
 
-```
-public/
-   index.html
-   assets/
-      ShopSmart.PNG
-      main.png.jpg
-src/
-   index.js          # Entry: providers, theme, routes
-   theme.css         # Theme tokens, components polish
-   components/       # Navbar, Products, LazyImage, BackToTop, etc.
-   pages/            # Home, Product, Cart, Login, Register, Profile, ...
-   redux/            # store.js, actions, reducers (cart)
-   utils/            # currency.js (USD->INR helper)
-```
+## �️ Tech Stack
 
-## 🛠️ Getting Started
+- **Frontend:** React 18, React Router v6, Redux, Bootstrap 5, Font Awesome 4
+- **State Management:** Redux Toolkit
+- **Notifications:** react-hot-toast
+- **Image Loading:** react-loading-skeleton, custom LazyImage
+- **API:** [Fake Store API](https://fakestoreapi.com/)
 
-Prerequisites: Node 18 or 20 (see `package.json` engines).
+---
 
-1) Install dependencies
+## � Installation & Setup
 
-```powershell
-npm install
-```
+**Prerequisites:** Node.js v18 or v20
 
-2) Start the dev server (Create React App)
+1. Clone the repository:
+   ```powershell
+   git clone https://github.com/rakesh-vajrapu/ShopSmart.git
+   cd shopsmart
+   ```
+2. Install dependencies:
+   ```powershell
+   npm install
+   ```
+3. Start the development server:
+   ```powershell
+   npm start
+   ```
+4. Build for production:
+   ```powershell
+   npm run build
+   ```
 
-```powershell
-npm start
-```
+You can also use the VS Code task **Build ShopSmart** from the Run and Debug panel.
 
-3) Build for production
+---
 
-```powershell
-npm run build
-```
+## 🚦 Usage
 
-You can also use the workspace task “Build ShopSmart” from VS Code’s Run and Debug panel.
+- Browse products, search, and filter by category
+- Add items to cart and adjust quantities
+- Register/login (demo only, uses localStorage)
+- View and edit profile (demo only)
+- Checkout (form is demo-only, no real payment)
 
-## � NPM Scripts
+---
 
-- `start` – CRA development server with hot reload
-- `build` – Production bundle to `build/`
-- `test` – CRA test runner (none added yet)
+## 🤝 Contribution Guide
 
-## 🧰 Tech Notes
+Contributions are welcome! To contribute:
 
-- UI: React 18, React Router v6, Bootstrap 5, Font Awesome 4
-- State: Redux (cart reducer with localStorage persistence)
-- Data: https://fakestoreapi.com/ (public demo API)
-- Currency: Displays prices in INR using a static USD→INR conversion (see `utils/currency.js`)
-- Images: `LazyImage` defers loading using IntersectionObserver + native `loading="lazy"`
-- Toaster: `react-hot-toast` for add-to-cart feedback
-- Accessibility: custom select and controls include ARIA roles/labels; back-to-top has `aria-label`
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add feature'`)
+4. Push to your branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
-## 📤 Deploy (Netlify)
+For major changes, please open an issue first to discuss what you’d like to change.
 
-Netlify is pre-configured via `netlify.toml`:
-
-- Build command: `npm run build`
-- Publish directory: `build`
-- SPA routing fallback to `index.html`
-- Node 18 environment
-
-Two easy options:
-
-1) Connect your GitHub repo to Netlify and select this project (recommended).
-2) Or build locally and drag-drop the `build/` folder into Netlify Deploys.
-
-## 🔐 About Authentication (Demo Only)
-
-Register/Login/Profile use `localStorage` only (no backend). Stored keys:
-
-- `users` – array of demo users
-- `isLoggedIn` – string "true" when logged in
-- `currentUser` – `{ name, email }` for navbar/profile
-- `cart` – cart line items with `qty`
-
-Never put real credentials here—this is strictly for demos.
-
-## 🧪 Known Limitations
-
-- Public Fake Store API can be slow or rate-limited at times
-- Demo auth is not secure and should be replaced with a real backend for production
-- No SSR; fully client-rendered SPA
-
-## 🧯 Troubleshooting
-
-- Node version: use Node 18 or 20. If installs fail, upgrade Node and clear cache.
-- Port already in use: stop the other app or set `PORT` env (CRA reads it).
-- Netlify 404s on client routes: ensure `netlify.toml` is deployed so `/*` redirects to `/index.html`.
-- CORS/API failures: the public API may occasionally fail—retry or use a mock API during development.
-
-## 🤝 Contributing
-
-Issues and PRs are welcome. For larger changes, please open an issue first to discuss scope.
+---
 
 ## 📄 License
 
-No license file is present in this repository. If you plan to use this code beyond personal learning, add an OSI-approved license (e.g., MIT) or obtain permission from the author.
+This project is for demo and educational purposes. To use in production, add an OSI-approved license (e.g., MIT) or contact the author.
 
-—
+---
+
+## 🌐 Author & Links
+
+- **Portfolio:** [your-portfolio-link](https://your-portfolio.com)
+- **Website:** [your-website-link](https://shopsmartweb.netlify.app/)
+- **GitHub:** [https://github.com/your-username](https://github.com/rakesh-vajrapu)
+
+---
 
 Made with ❤️ using React, Redux, and Bootstrap.
