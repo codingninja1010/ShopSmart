@@ -9,6 +9,7 @@ const Products = () => {
         <title>ShopSmart • Products</title>
         <meta name="description" content="Browse all products on ShopSmart. Filter by category, search, and sort by price or rating." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="ShopSmart • Products" />
         <meta property="og:description" content="Browse all products on ShopSmart. Filter by category, search, and sort by price or rating." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/product'} />

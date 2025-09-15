@@ -27,6 +27,7 @@ const Register = () => {
         <>
             <Helmet>
                 <title>Register • ShopSmart</title>
+                <meta name="robots" content="noindex,nofollow" />
                 <meta name="description" content="Create your ShopSmart account to save your cart and access your profile." />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="Register • ShopSmart" />

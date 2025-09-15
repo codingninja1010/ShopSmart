@@ -8,6 +8,7 @@ function Home() {
         <title>ShopSmart • Home</title>
         <meta name="description" content="Discover the latest products on ShopSmart. Great prices, fast checkout, smooth experience." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="ShopSmart • Home" />
         <meta property="og:description" content="Discover the latest products on ShopSmart. Great prices, fast checkout, smooth experience." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/'} />

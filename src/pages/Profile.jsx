@@ -70,6 +70,7 @@ const Profile = () => {
     <>
       <Helmet>
         <title>Profile • ShopSmart</title>
+        <meta name="robots" content="noindex,nofollow" />
         <meta name="description" content="View and edit your ShopSmart profile and manage your account settings." />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Profile • ShopSmart" />

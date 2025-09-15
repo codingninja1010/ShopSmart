@@ -98,7 +98,7 @@ This project is for demo and educational purposes. To use in production, add an 
 
 ## 🌐 Author & Links
 
-- **Portfolio:** [your-portfolio-link](https://your-portfolio.com)
+- **Portfolio:** [your-portfolio-link](https://rakeshvajrapu.netlify.app/)
 - **Website:** [your-website-link](https://shopsmartweb.netlify.app/)
 - **GitHub:** [https://github.com/your-username](https://github.com/rakesh-vajrapu)
 

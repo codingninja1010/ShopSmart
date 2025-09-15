@@ -175,8 +175,10 @@ const Cart = () => {
     <>
       <Helmet>
         <title>Cart • ShopSmart</title>
+        <meta name="robots" content="noindex,follow" />
         <meta name="description" content="Review items in your cart and proceed to checkout on ShopSmart." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="Cart • ShopSmart" />
         <meta property="og:description" content="Review items in your cart and proceed to checkout on ShopSmart." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart'} />

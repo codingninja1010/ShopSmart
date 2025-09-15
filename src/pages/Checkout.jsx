@@ -282,8 +282,10 @@ const Checkout = () => {
     <>
       <Helmet>
         <title>Checkout • ShopSmart</title>
+        <meta name="robots" content="noindex,nofollow" />
         <meta name="description" content="Enter billing details and complete your purchase on ShopSmart." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="Checkout • ShopSmart" />
         <meta property="og:description" content="Enter billing details and complete your purchase on ShopSmart." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout'} />

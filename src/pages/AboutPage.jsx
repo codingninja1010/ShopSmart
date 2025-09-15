@@ -8,6 +8,7 @@ const AboutPage = () => {
         <title>About • ShopSmart</title>
         <meta name="description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="About • ShopSmart" />
         <meta property="og:description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/about'} />

@@ -18,6 +18,7 @@ const ContactPage = () => {
         <title>Contact • ShopSmart</title>
         <meta name="description" content="Get in touch with the ShopSmart team. We’re here to help with your questions and feedback." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="Contact • ShopSmart" />
         <meta property="og:description" content="Get in touch with the ShopSmart team. We’re here to help with your questions and feedback." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/contact'} />

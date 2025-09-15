@@ -8,6 +8,7 @@ const PageNotFound = () => {
     <>
       <Helmet>
         <title>404 Not Found • ShopSmart</title>
+        <meta name="robots" content="noindex,follow" />
         <meta name="description" content="The page you’re looking for could not be found on ShopSmart." />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="404 Not Found • ShopSmart" />

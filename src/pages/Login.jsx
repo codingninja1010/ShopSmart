@@ -24,8 +24,10 @@ const Login = () => {
     <>
       <Helmet>
         <title>Login • ShopSmart</title>
+        <meta name="robots" content="noindex,nofollow" />
         <meta name="description" content="Sign in to your ShopSmart account to view your profile and checkout." />
         <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShopSmart" />
         <meta property="og:title" content="Login • ShopSmart" />
         <meta property="og:description" content="Sign in to your ShopSmart account to view your profile and checkout." />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/login'} />
