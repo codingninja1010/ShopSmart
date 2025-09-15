@@ -295,6 +295,12 @@ const Checkout = () => {
         <meta name="twitter:description" content="Enter billing details and complete your purchase on ShopSmart." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Checkout • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout', description: 'Enter billing details and complete your purchase on ShopSmart.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Checkout', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">

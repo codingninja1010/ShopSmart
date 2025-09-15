@@ -39,6 +39,12 @@ const Register = () => {
                 <meta name="twitter:description" content="Create your ShopSmart account to save your cart and access your profile." />
                 <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
                 <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/register'} />
+                                <script type="application/ld+json">
+                                    {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Register • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/register', description: 'Create your ShopSmart account to save your cart and access your profile.' })}
+                                </script>
+                                <script type="application/ld+json">
+                                    {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Register', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/register' } ] })}
+                                </script>
             </Helmet>
             <Navbar />
             <div className="container my-3 py-3">

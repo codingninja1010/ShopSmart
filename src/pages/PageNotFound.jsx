@@ -20,6 +20,12 @@ const PageNotFound = () => {
         <meta name="twitter:description" content="The page you’re looking for could not be found on ShopSmart." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/404'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: '404 Not Found • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/404', description: 'The page you’re looking for could not be found on ShopSmart.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: '404', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/404' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">

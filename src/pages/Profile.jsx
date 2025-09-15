@@ -82,6 +82,12 @@ const Profile = () => {
         <meta name="twitter:description" content="View and edit your ShopSmart profile and manage your account settings." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/profile'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Profile • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/profile', description: 'View and edit your ShopSmart profile and manage your account settings.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Profile', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/profile' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-5 py-4">

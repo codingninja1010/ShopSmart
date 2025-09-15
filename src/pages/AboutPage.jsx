@@ -18,6 +18,12 @@ const AboutPage = () => {
         <meta name="twitter:description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/about'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'About • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/about', description: 'Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'About', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/about' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
@@ -44,7 +50,7 @@ const AboutPage = () => {
         <div className="row">
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Men's Clothing category" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Men's Clothing</h5>
               </div>
@@ -52,7 +58,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Women's Clothing category" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Women's Clothing</h5>
               </div>
@@ -60,7 +66,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Jewelery category" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Jewelery</h5>
               </div>
@@ -68,7 +74,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Electronics category" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Electronics</h5>
               </div>

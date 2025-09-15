@@ -18,6 +18,24 @@ function Home() {
         <meta name="twitter:description" content="Discover the latest products on ShopSmart. Great prices, fast checkout, smooth experience." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/'} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Home • ShopSmart',
+            url: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/',
+            description: 'Discover the latest products on ShopSmart. Great prices, fast checkout, smooth experience.'
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }
+            ]
+          })}
+        </script>
       </Helmet>
       <Navbar />
       <Main />

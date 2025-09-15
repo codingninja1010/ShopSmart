@@ -37,6 +37,12 @@ const Login = () => {
         <meta name="twitter:description" content="Sign in to your ShopSmart account to view your profile and checkout." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/login'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Login • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/login', description: 'Sign in to your ShopSmart account to view your profile and checkout.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Login', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/login' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">

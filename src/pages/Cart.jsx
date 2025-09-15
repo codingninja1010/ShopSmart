@@ -188,6 +188,12 @@ const Cart = () => {
         <meta name="twitter:description" content="Review items in your cart and proceed to checkout on ShopSmart." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Cart • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart', description: 'Review items in your cart and proceed to checkout on ShopSmart.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Cart', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">

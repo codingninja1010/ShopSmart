@@ -28,6 +28,12 @@ const ContactPage = () => {
         <meta name="twitter:description" content="Get in touch with the ShopSmart team. We’re here to help with your questions and feedback." />
         <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/contact'} />
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Contact • ShopSmart', url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/contact', description: 'Get in touch with the ShopSmart team. We’re here to help with your questions and feedback.' })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'Home', item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/' }, { '@type': 'ListItem', position: 2, name: 'Contact', item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/contact' } ] })}
+        </script>
       </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
