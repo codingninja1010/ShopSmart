@@ -62,6 +62,12 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+/* Global smooth scrolling with accessibility opt-out */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 h1, h2, h3, h4, h5, h6, .section-title, .card-title {
   color: var(--heading) !important;
   font-weight: 700;

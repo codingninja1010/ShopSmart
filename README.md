@@ -45,19 +45,26 @@ ShopSmart is a demo e-commerce platform that lets users browse products, add to 
 **Prerequisites:** Node.js v18 or v20
 
 1. Clone the repository:
+
    ```powershell
    git clone https://github.com/rakesh-vajrapu/ShopSmart.git
    cd shopsmart
    ```
+
 2. Install dependencies:
+
    ```powershell
    npm install
    ```
+
 3. Start the development server:
+
    ```powershell
    npm start
    ```
+
 4. Build for production:
+
    ```powershell
    npm run build
    ```
@@ -108,13 +115,6 @@ Made with ❤️ using React, Redux, and Bootstrap.
 
 ---
 
-## 🕸️ SEO & Social Sharing (OG/Twitter)
+## 🕸️ SEO & Social Sharing
 
-This app sets default Open Graph and Twitter Card tags in `public/index.html` and uses `react-helmet-async` to set dynamic per-page meta (e.g., product title/description/image).
-
-Because ShopSmart is an SPA, some crawlers may not execute JavaScript and therefore miss tags set at runtime. If you deploy on Netlify, enable prerendering for bots so OG/Twitter tags are visible to scrapers:
-
-- Netlify Dashboard → Your Site → Functions/Settings → Prerendering → Enable prerendering
-- Or configure a prerender service for specific user agents (Facebook/Twitter/Slack crawlers)
-
-For best results, ensure your OG/Twitter image points to an absolute URL and is at least 1200×630 for `summary_large_image`.
+This app includes optimized Open Graph and Twitter Card tags in `public/index.html` for better link previews. Use absolute image URLs for reliable sharing across platforms.

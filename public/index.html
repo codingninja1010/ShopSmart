@@ -18,20 +18,23 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ShopSmart">
   <meta property="og:locale" content="en_US">
-  <meta property="og:url" content="%PUBLIC_URL%/">
-  <meta property="og:title" content="ShopSmart">
-  <meta property="og:description" content="A Ecommerce Website made with React.js Framework.">
-  <meta property="og:image" content="%PUBLIC_URL%/assets/ShopSmart.PNG">
+  <meta property="og:url" content="https://shopsmartweb.netlify.app/">
+  <meta property="og:title" content="ShopSmart – React E‑Commerce Demo">
+  <meta property="og:description" content="A fast, modern React e‑commerce demo with product browsing, cart, and checkout.">
+  <meta property="og:image" content="https://shopsmartweb.netlify.app/assets/ShopSmart.PNG">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ShopSmart preview">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="%PUBLIC_URL%/">
-  <meta property="twitter:title" content="ShopSmart">
-  <meta property="twitter:description" content="A Ecommerce Website made with React.js Framework.">
-  <meta property="twitter:image" content="%PUBLIC_URL%/assets/ShopSmart.PNG">
+  <meta property="twitter:url" content="https://shopsmartweb.netlify.app/">
+  <meta property="twitter:title" content="ShopSmart – React E‑Commerce Demo">
+  <meta property="twitter:description" content="A fast, modern React e‑commerce demo with product browsing, cart, and checkout.">
+  <meta property="twitter:image" content="https://shopsmartweb.netlify.app/assets/ShopSmart.PNG">
 
   <!-- Canonical -->
-  <link rel="canonical" href="%PUBLIC_URL%/" />
+  <link rel="canonical" href="https://shopsmartweb.netlify.app/" />
 
   <!-- Organization & WebSite JSON-LD -->
   <script type="application/ld+json">
@@ -39,8 +42,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "ShopSmart",
-      "url": "%PUBLIC_URL%/",
-      "logo": "%PUBLIC_URL%/assets/ShopSmart.PNG"
+      "url": "https://shopsmartweb.netlify.app/",
+      "logo": "https://shopsmartweb.netlify.app/assets/ShopSmart.PNG"
     }
   </script>
   <script type="application/ld+json">
@@ -48,12 +51,12 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "ShopSmart",
-      "url": "%PUBLIC_URL%/",
+      "url": "https://shopsmartweb.netlify.app/",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "%PUBLIC_URL%/product?q={search_term_string}"
+          "urlTemplate": "https://shopsmartweb.netlify.app/product?q={search_term_string}"
         },
         "query-input": "required name=search_term_string"
       }
@@ -65,6 +68,7 @@
   <!-- Performance: establish early connection for product API/images -->
   <link rel="dns-prefetch" href="//fakestoreapi.com">
   <link rel="preconnect" href="https://fakestoreapi.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/ShopSmart.PNG" imagesrcset="/assets/ShopSmart.PNG 1x" imagesizes="100vw">
 
 </head>
 
