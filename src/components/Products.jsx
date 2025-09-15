@@ -10,6 +10,7 @@ import SortSelect from "./SortSelect";
 import LazyImage from "./LazyImage";
 import toast from "react-hot-toast";
 import { usdToInr, formatINR } from "../utils/currency";
+import { fetchWithRetry } from "../utils/fetchWithRetry";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ const Products = () => {
       setError("");
       setLoading(true);
       try {
-        const response = await fetch("https://fakestoreapi.com/products/", { signal });
+        const response = await fetchWithRetry("https://fakestoreapi.com/products/", { signal, retries: 2, backoffMs: 200 });
         if (!response.ok) throw new Error(`Failed to load products (${response.status})`);
         const json = await response.json();
         setData(json);

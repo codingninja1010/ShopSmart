@@ -16,19 +16,49 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://reactjs-ecommerce-app.vercel.app/">
+  <meta property="og:site_name" content="ShopSmart">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="%PUBLIC_URL%/">
   <meta property="og:title" content="ShopSmart">
   <meta property="og:description" content="A Ecommerce Website made with React.js Framework.">
-  <meta property="og:image"
-    content="https://i.ibb.co/fQ293tm/image.png">
+  <meta property="og:image" content="%PUBLIC_URL%/assets/ShopSmart.PNG">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://reactjs-ecommerce-app.vercel.app/">
+  <meta property="twitter:url" content="%PUBLIC_URL%/">
   <meta property="twitter:title" content="ShopSmart">
   <meta property="twitter:description" content="A Ecommerce Website made with React.js Framework.">
-  <meta property="twitter:image"
-    content="https://i.ibb.co/fQ293tm/image.png">
+  <meta property="twitter:image" content="%PUBLIC_URL%/assets/ShopSmart.PNG">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="%PUBLIC_URL%/" />
+
+  <!-- Organization & WebSite JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ShopSmart",
+      "url": "%PUBLIC_URL%/",
+      "logo": "%PUBLIC_URL%/assets/ShopSmart.PNG"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ShopSmart",
+      "url": "%PUBLIC_URL%/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "%PUBLIC_URL%/product?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
 
 
 

@@ -5,6 +5,7 @@ import { addCart, delCart, removeAllOfProduct } from "../redux/action";
 import { Link } from "react-router-dom";
 import LazyImage from "../components/LazyImage";
 import { usdToInr, formatINR } from "../utils/currency";
+import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
   const state = useSelector((state) => state.handleCart);
@@ -172,6 +173,20 @@ const Cart = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Cart • ShopSmart</title>
+        <meta name="description" content="Review items in your cart and proceed to checkout on ShopSmart." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Cart • ShopSmart" />
+        <meta property="og:description" content="Review items in your cart and proceed to checkout on ShopSmart." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Cart • ShopSmart" />
+        <meta name="twitter:description" content="Review items in your cart and proceed to checkout on ShopSmart." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/cart'} />
+      </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
         <h1 className="text-center">Cart</h1>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navbar, Footer } from "../components";
+import { Helmet } from "react-helmet-async";
 
 const getUser = () => {
   // Prefer unified 'currentUser' written by Login/Register; fallback to legacy 'user'
@@ -67,6 +68,20 @@ const Profile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Profile • ShopSmart</title>
+        <meta name="description" content="View and edit your ShopSmart profile and manage your account settings." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Profile • ShopSmart" />
+        <meta property="og:description" content="View and edit your ShopSmart profile and manage your account settings." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/profile'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Profile • ShopSmart" />
+        <meta name="twitter:description" content="View and edit your ShopSmart profile and manage your account settings." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/profile'} />
+      </Helmet>
       <Navbar />
       <div className="container my-5 py-4">
         <div className="row justify-content-center">

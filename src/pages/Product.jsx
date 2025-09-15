@@ -9,6 +9,8 @@ import { Footer, Navbar } from "../components";
 import toast from "react-hot-toast";
 import LazyImage from "../components/LazyImage";
 import { usdToInr, formatINR } from "../utils/currency";
+import { fetchWithRetry } from "../utils/fetchWithRetry";
+import { Helmet } from "react-helmet-async";
 
 const Product = () => {
   const { id } = useParams();
@@ -34,15 +36,15 @@ const Product = () => {
       setLoading(true);
       setLoading2(true);
       try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`, { signal });
+        const response = await fetchWithRetry(`https://fakestoreapi.com/products/${id}`, { signal, retries: 2, backoffMs: 200 });
         if (!response.ok) throw new Error(`Failed to load product (${response.status})`);
         const data = await response.json();
         setProduct(data);
         setLoading(false);
         try {
-          const response2 = await fetch(
+          const response2 = await fetchWithRetry(
             `https://fakestoreapi.com/products/category/${data.category}`,
-            { signal }
+            { signal, retries: 1, backoffMs: 200 }
           );
           if (response2.ok) {
             const data2 = await response2.json();
@@ -203,6 +205,83 @@ const Product = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>{product?.title ? `${product.title} • ShopSmart` : 'Product • ShopSmart'}</title>
+        {product?.description && (
+          <meta name="description" content={product.description} />
+        )}
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={product?.title ? `${product.title} • ShopSmart` : 'Product • ShopSmart'} />
+        {product?.description && (
+          <meta property="og:description" content={product.description} />
+        )}
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/product'} />
+        {product?.image && (
+          <meta property="og:image" content={product.image} />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={product?.title ? `${product.title} • ShopSmart` : 'Product • ShopSmart'} />
+        {product?.description && (
+          <meta name="twitter:description" content={product.description} />
+        )}
+        {product?.image && (
+          <meta name="twitter:image" content={product.image} />
+        )}
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/product'} />
+        {product?.title && product?.price && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              '@context': 'https://schema.org/',
+              '@type': 'Product',
+              name: product.title,
+              image: [product.image],
+              description: product.description || '',
+              sku: String(product.id || ''),
+              aggregateRating: product.rating ? {
+                '@type': 'AggregateRating',
+                ratingValue: product.rating.rate,
+                reviewCount: product.rating.count
+              } : undefined,
+              offers: {
+                '@type': 'Offer',
+                url: typeof window !== 'undefined' ? window.location.href : 'https://example.com/product',
+                priceCurrency: 'INR',
+                price: Number((Number((typeof product.price === 'number' ? product.price : Number(product.price))) * 82).toFixed(2)),
+                availability: 'https://schema.org/InStock',
+                seller: { '@type': 'Organization', name: 'ShopSmart' }
+              }
+            })}
+          </script>
+        )}
+        {product?.title && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: typeof window !== 'undefined' ? window.location.origin + '/' : 'https://example.com/'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Products',
+                  item: typeof window !== 'undefined' ? window.location.origin + '/product' : 'https://example.com/product'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: product.title,
+                  item: typeof window !== 'undefined' ? window.location.href : 'https://example.com/product'
+                }
+              ]
+            })}
+          </script>
+        )}
+      </Helmet>
       <Navbar />
       <div className="container">
         {error && (

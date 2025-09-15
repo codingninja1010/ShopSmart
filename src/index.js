@@ -13,6 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import BackToTop from "./components/BackToTop";
 import RouteFallback from "./components/RouteFallback";
+import { HelmetProvider } from "react-helmet-async";
 
 const Home = lazy(() => import('./pages/Home'));
 const Product = lazy(() => import('./pages/Product'));
@@ -51,12 +52,13 @@ const ThemeProvider = ({ children }) => {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ScrollToTop>
-      <ThemeProvider>
-        <Provider store={store}>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
+  <HelmetProvider>
+    <BrowserRouter>
+      <ScrollToTop>
+        <ThemeProvider>
+          <Provider store={store}>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Products />} />
               <Route path="/product/:id" element={<Product />} />
@@ -69,12 +71,13 @@ root.render(
               <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/product/*" element={<PageNotFound />} />
-            </Routes>
-          </Suspense>
-          <Toaster />
-          <BackToTop />
-        </Provider>
-      </ThemeProvider>
-    </ScrollToTop>
-  </BrowserRouter>
+              </Routes>
+            </Suspense>
+            <Toaster />
+            <BackToTop />
+          </Provider>
+        </ThemeProvider>
+      </ScrollToTop>
+    </BrowserRouter>
+  </HelmetProvider>
 );

@@ -1,8 +1,23 @@
 import React from 'react'
 import { Footer, Navbar } from "../components";
+import { Helmet } from "react-helmet-async";
 const AboutPage = () => {
   return (
     <>
+      <Helmet>
+        <title>About • ShopSmart</title>
+        <meta name="description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="About • ShopSmart" />
+        <meta property="og:description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/about'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About • ShopSmart" />
+        <meta name="twitter:description" content="Learn more about ShopSmart—our mission is to make online shopping smarter, easier, and more enjoyable." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/about'} />
+      </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
         <h1 className="text-center">About Us</h1>

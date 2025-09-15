@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer, Navbar } from "../components";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +22,20 @@ const Login = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Login • ShopSmart</title>
+        <meta name="description" content="Sign in to your ShopSmart account to view your profile and checkout." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Login • ShopSmart" />
+        <meta property="og:description" content="Sign in to your ShopSmart account to view your profile and checkout." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/login'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Login • ShopSmart" />
+        <meta name="twitter:description" content="Sign in to your ShopSmart account to view your profile and checkout." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/login'} />
+      </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
         <h1 className="text-center">Login</h1>

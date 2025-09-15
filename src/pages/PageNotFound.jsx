@@ -1,10 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../components";
+import { Helmet } from "react-helmet-async";
 
 const PageNotFound = () => {
   return (
     <>
+      <Helmet>
+        <title>404 Not Found • ShopSmart</title>
+        <meta name="description" content="The page you’re looking for could not be found on ShopSmart." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="404 Not Found • ShopSmart" />
+        <meta property="og:description" content="The page you’re looking for could not be found on ShopSmart." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/404'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="404 Not Found • ShopSmart" />
+        <meta name="twitter:description" content="The page you’re looking for could not be found on ShopSmart." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/404'} />
+      </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
         <div className="container">

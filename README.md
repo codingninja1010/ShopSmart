@@ -105,3 +105,16 @@ This project is for demo and educational purposes. To use in production, add an 
 ---
 
 Made with ❤️ using React, Redux, and Bootstrap.
+
+---
+
+## 🕸️ SEO & Social Sharing (OG/Twitter)
+
+This app sets default Open Graph and Twitter Card tags in `public/index.html` and uses `react-helmet-async` to set dynamic per-page meta (e.g., product title/description/image).
+
+Because ShopSmart is an SPA, some crawlers may not execute JavaScript and therefore miss tags set at runtime. If you deploy on Netlify, enable prerendering for bots so OG/Twitter tags are visible to scrapers:
+
+- Netlify Dashboard → Your Site → Functions/Settings → Prerendering → Enable prerendering
+- Or configure a prerender service for specific user agents (Facebook/Twitter/Slack crawlers)
+
+For best results, ensure your OG/Twitter image points to an absolute URL and is at least 1200×630 for `summary_large_image`.

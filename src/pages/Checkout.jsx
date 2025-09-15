@@ -3,6 +3,7 @@ import { Footer, Navbar } from "../components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { usdToInr, formatINR } from "../utils/currency";
+import { Helmet } from "react-helmet-async";
 const Checkout = () => {
   const state = useSelector((state) => state.handleCart);
 
@@ -279,6 +280,20 @@ const Checkout = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Checkout • ShopSmart</title>
+        <meta name="description" content="Enter billing details and complete your purchase on ShopSmart." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Checkout • ShopSmart" />
+        <meta property="og:description" content="Enter billing details and complete your purchase on ShopSmart." />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout'} />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Checkout • ShopSmart" />
+        <meta name="twitter:description" content="Enter billing details and complete your purchase on ShopSmart." />
+        <meta name="twitter:image" content={process.env.PUBLIC_URL + '/assets/ShopSmart.PNG'} />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://example.com/checkout'} />
+      </Helmet>
       <Navbar />
       <div className="container my-3 py-3">
         <h1 className="text-center">Checkout</h1>

@@ -33,3 +33,45 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+# Advise crawlers not to index utility pages
+[[headers]]
+  for = "/cart"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
+
+[[headers]]
+  for = "/checkout"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/login"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/register"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/profile"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Global security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    X-Frame-Options = "DENY"
+    # NOTE: Adjust connect-src if you add more APIs, analytics, or error reporting.
+    # Default CSP for this SPA hosted on Netlify, loading assets from self and CDN for fonts/icons.
+    # Allows images from self, data URIs, blob, and fakestoreapi.com product images.
+    # Disallows inline scripts except the CRA runtime nonce-based hashes (we still block unsafe-inline).
+    # If you embed third-party widgets, extend the directives accordingly.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; font-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self'; connect-src 'self' https://fakestoreapi.com; upgrade-insecure-requests"
+
