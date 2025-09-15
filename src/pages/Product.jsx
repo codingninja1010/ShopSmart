@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
 import { Footer, Navbar } from "../components";
+import toast from "react-hot-toast";
 import LazyImage from "../components/LazyImage";
 import { usdToInr, formatINR } from "../utils/currency";
 
@@ -15,6 +16,7 @@ const Product = () => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -22,23 +24,47 @@ const Product = () => {
     dispatch(addCart(product));
   };
 
+  const [reloadKey, setReloadKey] = useState(0);
+
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const getProduct = async () => {
+      setError("");
       setLoading(true);
       setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`, { signal });
+        if (!response.ok) throw new Error(`Failed to load product (${response.status})`);
+        const data = await response.json();
+        setProduct(data);
+        setLoading(false);
+        try {
+          const response2 = await fetch(
+            `https://fakestoreapi.com/products/category/${data.category}`,
+            { signal }
+          );
+          if (response2.ok) {
+            const data2 = await response2.json();
+            setSimilarProducts(data2);
+          }
+        } catch (_) {
+          // ignore similar products error
+        } finally {
+          setLoading2(false);
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setError("Unable to load product. Please try again.");
+          toast.error('Failed to load product');
+          setLoading(false);
+          setLoading2(false);
+        }
+      }
     };
     getProduct();
-  }, [id]);
+    return () => controller.abort();
+  }, [id, reloadKey]);
 
   const Loading = () => {
     return (
@@ -80,7 +106,7 @@ const Product = () => {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            <div className="col-md-6 col-md-6 py-5">
+            <div className="col-md-6 col-sm-12 py-5">
               <h4 className="text-uppercase text-muted">{product.category}</h4>
               <h1 className="display-5">{product.title}</h1>
               <p className="lead">
@@ -179,6 +205,12 @@ const Product = () => {
     <>
       <Navbar />
       <div className="container">
+        {error && (
+          <div className="alert alert-danger my-3 d-flex align-items-center justify-content-between" role="alert">
+            <span>{error}</span>
+            <button className="btn btn-sm btn-outline-light" onClick={() => setReloadKey(k => k + 1)}>Retry</button>
+          </div>
+        )}
         <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
         <div className="row my-5 py-5">
           <div className="d-none d-md-block">

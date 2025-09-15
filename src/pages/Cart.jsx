@@ -36,17 +36,10 @@ const Cart = () => {
   };
 
   const ShowCart = () => {
-    let subtotal = 0;
-  // Base shipping in USD; convert to INR for display
-  let shippingUSD = 30.0;
-    let totalItems = 0;
-    state.map((item) => {
-      return (subtotal += item.price * item.qty);
-    });
-
-    state.map((item) => {
-      return (totalItems += item.qty);
-    });
+    const subtotal = state.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    // Base shipping in USD; convert to INR for display
+    const shippingUSD = 30.0;
+    const totalItems = state.reduce((sum, item) => sum + item.qty, 0);
     return (
       <>
         <section className="h-100 gradient-custom">

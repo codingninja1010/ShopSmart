@@ -225,6 +225,9 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
 }
 @media (max-width: 767.98px) {
   .product-card { transform-origin: center; }
+  .card .btn { width: 100%; margin-left: 0 !important; margin-right: 0 !important; }
+  .filter-toolbar-card { padding: .75rem; }
+  .navbar .navbar-brand { font-size: 1.5rem; }
 }
 
 /* Soft badge for categories */
@@ -389,5 +392,19 @@ h1, h2, h3, h4, h5, h6, .section-title, .card-title {
 .lazy-image-wrapper.loaded .lazy-image {
   filter: blur(0);
   opacity: 1;
+}
+
+/* Modal responsiveness */
+.modal-dialog { max-width: 720px; }
+@media (max-width: 576px) {
+  .modal-dialog { max-width: 95vw; margin: .5rem auto; }
+  .modal-content { border-radius: 12px; }
+  .modal-body { padding: .75rem; }
+}
+.modal .img-fluid { max-width: 100%; height: auto; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .product-card, .product-col, .lazy-image, .navbar .nav-link { transition: none !important; }
 }
 

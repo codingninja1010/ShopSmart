@@ -22,17 +22,10 @@ const Checkout = () => {
   };
 
   const ShowCheckout = () => {
-    let subtotal = 0;
-  // Base shipping in USD; convert for display
-  let shippingUSD = 30.0;
-    let totalItems = 0;
-    state.map((item) => {
-      return (subtotal += item.price * item.qty);
-    });
-
-    state.map((item) => {
-      return (totalItems += item.qty);
-    });
+    const subtotal = state.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    // Base shipping in USD; convert for display
+    const shippingUSD = 30.0;
+    const totalItems = state.reduce((sum, item) => sum + item.qty, 0);
     return (
       <>
         <div className="container py-5">

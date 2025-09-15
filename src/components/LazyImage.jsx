@@ -62,7 +62,8 @@ const LazyImage = ({
         loading="lazy"
         decoding="async"
         sizes={sizes}
-        fetchPriority={fetchPriority}
+  // Use lowercase attribute to avoid unknown prop warning in React
+  {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
         srcSet={srcSet}
         onClick={onClick}
         onLoad={() => setLoaded(true)}

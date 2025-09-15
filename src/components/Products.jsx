@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
@@ -15,6 +15,8 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("relevance"); // relevance | price-asc | price-desc | rating
   const [activeCat, setActiveCat] = useState("all");
@@ -30,15 +32,18 @@ const Products = () => {
     const controller = new AbortController();
     const { signal } = controller;
     const getProducts = async () => {
+      setError("");
       setLoading(true);
       try {
         const response = await fetch("https://fakestoreapi.com/products/", { signal });
+        if (!response.ok) throw new Error(`Failed to load products (${response.status})`);
         const json = await response.json();
         setData(json);
         setFilter(json);
       } catch (err) {
         if (err.name !== 'AbortError') {
           console.error('Failed to load products', err);
+          setError("Unable to load products. Please try again.");
         }
       } finally {
         setLoading(false);
@@ -47,7 +52,7 @@ const Products = () => {
 
     getProducts();
     return () => controller.abort();
-  }, []);
+  }, [reloadKey]);
 
   const Loading = () => {
     return (
@@ -209,6 +214,12 @@ const Products = () => {
             <hr />
           </div>
         </div>
+        {error && (
+          <div className="alert alert-danger my-3 d-flex align-items-center justify-content-between" role="alert">
+            <span>{error}</span>
+            <button className="btn btn-sm btn-outline-light" onClick={() => setReloadKey(k => k + 1)}>Retry</button>
+          </div>
+        )}
         <div className="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}
         </div>
@@ -216,11 +227,20 @@ const Products = () => {
 
       {/* Quick View Modal */}
       {preview && (
-        <div className="modal fade show" style={{display:'block'}} tabIndex="-1" role="dialog">
+        <div
+          className="modal fade show"
+          style={{ display: 'block' }}
+          tabIndex={-1}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quickViewTitle"
+          onKeyDown={(e) => { if (e.key === 'Escape') setPreview(null); }}
+        >
           <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <FocusTrap onClose={() => setPreview(null)}>
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">{preview.title}</h5>
+                <h5 id="quickViewTitle" className="modal-title">{preview.title}</h5>
                 <button type="button" className="btn-close" onClick={()=> setPreview(null)} aria-label="Close"></button>
               </div>
               <div className="modal-body">
@@ -249,6 +269,7 @@ const Products = () => {
                 <button type="button" className="btn btn-outline-secondary" onClick={()=> setPreview(null)}>Close</button>
               </div>
             </div>
+            </FocusTrap>
           </div>
           {/* Backdrop */}
           <div className="modal-backdrop fade show" onClick={()=> setPreview(null)}></div>
@@ -259,3 +280,52 @@ const Products = () => {
 };
 
 export default Products;
+
+// FocusTrap component for modal accessibility
+const FocusTrap = ({ children, onClose }) => {
+  const containerRef = useRef(null);
+  const lastFocusedRef = useRef(null);
+
+  useEffect(() => {
+    lastFocusedRef.current = document.activeElement;
+    const container = containerRef.current;
+    if (!container) return;
+    // Focus first focusable element
+    const focusables = container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusables.length) {
+      focusables[0].focus();
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Tab') return;
+      const nodes = Array.from(focusables).filter(el => !el.hasAttribute('disabled'));
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
+    };
+    container.addEventListener('keydown', handleKeyDown);
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown);
+      // Restore focus to previously focused element
+      if (lastFocusedRef.current && typeof lastFocusedRef.current.focus === 'function') {
+        lastFocusedRef.current.focus();
+      }
+      if (onClose) onClose();
+    };
+  }, [onClose]);
+
+  return <div ref={containerRef}>{children}</div>;
+};

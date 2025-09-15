@@ -1,11 +1,17 @@
-// Retrieve initial state from localStorage if available
+// Retrieve initial state from localStorage if available (guarded for SSR/blocked storage)
 const getInitialCart = () => {
-  const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : [];
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) return [];
+    const storedCart = window.localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  } catch (_) {
+    return [];
+  }
 };
 
 const handleCart = (state = getInitialCart(), action) => {
   const product = action.payload;
+  if (!product || typeof product.id === 'undefined') return state;
   let updatedCart;
 
   switch (action.type) {
@@ -20,12 +26,11 @@ const handleCart = (state = getInitialCart(), action) => {
       } else {
         updatedCart = [...state, { ...product, qty: 1 }];
       }
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
 
     case "DELITEM":
       const exist2 = state.find((x) => x.id === product.id);
+      if (!exist2) return state;
       if (exist2.qty === 1) {
         updatedCart = state.filter((x) => x.id !== exist2.id);
       } else {
@@ -33,14 +38,11 @@ const handleCart = (state = getInitialCart(), action) => {
           x.id === product.id ? { ...x, qty: x.qty - 1 } : x
         );
       }
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
 
     case "REMALLITEM":
       // Remove the product completely regardless of current quantity
       updatedCart = state.filter((x) => x.id !== product.id);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
 
     default:

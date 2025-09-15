@@ -49,6 +49,15 @@ const Profile = () => {
         JSON.stringify({ ...stored, password: newPass })
       );
     }
+    // Also sync password in users array for login consistency
+    try {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const idx = users.findIndex(u => u.email === (stored?.email || user.email));
+      if (idx !== -1) {
+        users[idx] = { ...users[idx], password: newPass };
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+    } catch (_) {}
     setMsg("Password changed successfully!");
     setOldPass("");
     setNewPass("");
